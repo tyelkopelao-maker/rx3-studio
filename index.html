@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b121b"><meta name="description" content="Editor local de texturas RX3 para FIFA 16 Mobile">
+<link rel="manifest" href="manifest.webmanifest"><title>RX3 Studio</title><link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar"><div class="brand">RX3 <span>STUDIO</span></div><div class="top-right"><span class="pill">BETA · PROCESAMIENTO LOCAL</span><button id="helpBtn" class="iconbtn" aria-label="Ayuda">?</button></div></header>
+<main>
+<section class="hero"><div class="eyebrow">FIFA 16 MOBILE · TEXTURE WORKSHOP</div><h1>Editá tus kits<br><span>sin pasar por PC.</span></h1><p>Cargá un RX3, inspeccioná sus cinco texturas, reemplazá las que quieras y reconstruí el archivo desde el navegador.</p></section>
+<section class="panel upload-panel">
+  <div id="dropzone" class="dropzone"><div class="upload-icon">↑</div><strong>Seleccionar archivo RX3</strong><small>Buscalo en el almacenamiento de tu Android</small><input id="fileInput" type="file" accept=".rx3,application/octet-stream"></div>
+  <div id="fileRow" class="file-row hidden"><div class="file-icon">RX3</div><div class="file-details"><strong id="fileName"></strong><small id="fileSize"></small></div><button id="clearBtn" class="btn ghost">Cambiar</button></div>
+  <div id="status" class="status">Esperando un archivo RX3…</div>
+</section>
+<section id="editor" class="hidden">
+  <div class="section-head"><div><div class="eyebrow">CONTENIDO DETECTADO</div><h2>Texturas del kit</h2></div><span class="resolution">SALIDA · MÁX. 1024 PX</span></div>
+  <p class="subtext">Se conserva la proporción original de cada textura para no alterar el mapeado UV. Las texturas cuadradas se procesan a 1024 × 1024.</p>
+  <div id="textureGrid" class="texture-grid"></div>
+  <section class="panel export-panel"><div class="export-copy"><div class="eyebrow">RECONSTRUCCIÓN</div><h2>Exportar RX3</h2><p>Se regeneran los mipmaps y se actualizan los tamaños y offsets de los chunks. Los bloques no relacionados con texturas se conservan.</p></div><div class="export-actions"><button id="exportBtn" class="btn primary" disabled><span>↓</span> Reconstruir y descargar RX3</button><small id="exportHint">Cargá un RX3 compatible para habilitar la exportación.</small></div></section>
+</section>
+<section id="emptyHelp" class="info-grid"><article class="info-card"><b>01</b><h3>Abrí el RX3</h3><p>El editor identifica la tabla de nombres y los cinco bloques de textura.</p></article><article class="info-card"><b>02</b><h3>Reemplazá PNG</h3><p>Podés cambiar crest_cm, jersey_cm, jersey_coeff, shorts_cm y shorts_coeff por separado.</p></article><article class="info-card"><b>03</b><h3>Exportá</h3><p>Se reconstruye el archivo completo, manteniendo los bloques que no editaste.</p></article></section>
+<footer>RX3 Studio · edición local · no se envían archivos a servidores</footer>
+</main>
+<div id="helpModal" class="modal hidden"><div class="modal-card"><button id="closeHelp" class="close">×</button><h2>Ayuda y compatibilidad</h2><p>El editor trabaja con RX3 que contengan TEXTURE_BATCH, TEXTURE y NAME_TABLE, y reconoce texturas RGBA32, DXT1 y DXT5.</p><ul><li>La resolución de salida aumenta hasta un máximo de 1024 píxeles en el lado mayor, respetando la proporción original.</li><li>Una textura pequeña ampliada a 1024 no recupera detalles que no existían en el original.</li><li>La compresión DXT puede introducir pequeñas diferencias visuales.</li><li>Probá primero el archivo exportado en una copia de tu juego.</li></ul><p>Todo el procesamiento ocurre dentro del navegador.</p></div></div>
+<script src="app.js"></script><script>if('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js').catch(()=>{});</script>
+</body></html>
